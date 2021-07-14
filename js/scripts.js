@@ -4,7 +4,10 @@ function Contact(first, last) {
     this.lastName = last;
 }
 
-//user interface logic
+Contact.prototype.fullName = function() {
+        return this.firstName + " " + this.lastName;
+    }
+    //user interface logic
 
 $(document).ready(() => {
     $("form#new-contact").submit((event) => {
