@@ -20,7 +20,13 @@ Address.prototype.fullAddress = function() {
         return this.street + ", " + this.city + this.county;
     }
     //user interface logic
-
+function resetFields() {
+    $("input#new-first-name").val("");
+    $("input#new-last-name").val("");
+    $("input.new-street").val("");
+    $("input.new-city").val("");
+    $("input.new-county").val("");
+}
 $(document).ready(() => {
 
     $("#add-address").click(() => {
@@ -72,11 +78,7 @@ $(document).ready(() => {
             });
         });
 
-        $("input#new-first-name").val("");
-        $("input#new-last-name").val("");
-        $("input.new-street").val("");
-        $("input.new-city").val("");
-        $("input.new-county").val("");
+        resetFields();
 
     });
 })
