@@ -17,6 +17,7 @@ Contact.prototype.fullName = function() {
     //user interface logic
 
 $(document).ready(() => {
+
     $("#add-address").click(() => {
         $("#new-addresses").append('<div class="new-address">' +
             '<div class="form-group">' +
@@ -33,6 +34,8 @@ $(document).ready(() => {
             '</div>' +
             '</div>');
     });
+
+    // What happens when we submit the form
     $("form#new-contact").submit((event) => {
         event.preventDefault();
 
@@ -43,8 +46,14 @@ $(document).ready(() => {
 
         $("ul#contacts").append("<li><span class = 'contact'>" + newContact.fullName() + "</span></li>");
 
-        $("input#new-first-name").val("");
-        $("input#new-last-name").val("");
+        $(".new-address").each(function() {
+            let inputtedStreet = $(this).find("input.new-street").val();
+            let inputtedCity = $(this).find("input.new-city").val();
+            var inputtedCounty = $(this).find("input.new-county").val();
+            var newAddress = new Address(inputtedStreet, inputtedCity, inputtedCounty);
+            newContact.addresses.push(newAddress);
+        });
+
 
         $(".contact").last().click(function() {
             $("#show-contact").show();
@@ -55,16 +64,14 @@ $(document).ready(() => {
             $("ul#addresses").text("");
             newContact.addresses.forEach((address) => {
                 $("ul#addresses").append("<li>" + address.street + ", " + address.city + " " + address.county + "</li>");
-            })
+            });
         });
 
-        $(".new-address").each(function() {
-            let inputtedStreet = $(this).find("input.new-street").val();
-            let inputtedCity = $(this).find("input.new-city").val();
-            var inputtedCounty = $(this).find("input.new-county").val();
-            var newAddress = new Address(inputtedStreet, inputtedCity, inputtedCounty);
-            newContact.addresses.push(newAddress);
-        });
+        $("input#new-first-name").val("");
+        $("input#new-last-name").val("");
+        $("input.new-street").val("");
+        $("input.new-city").val("");
+        $("input.new-county").val("");
 
-    })
+    });
 })
