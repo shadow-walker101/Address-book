@@ -51,6 +51,19 @@ $(document).ready(() => {
             $("#show-contact h2").text(newContact.firstName);
             $("span.first-name").text(newContact.firstName);
             $("span.last-name").text(newContact.lastName);
+
+            $("ul#addresses").text("");
+            newContact.addresses.forEach((address) => {
+                $("ul#addresses").append("<li>" + address.street + ", " + address.city + " " + address.county + "</li>");
+            })
+        });
+
+        $(".new-address").each(function() {
+            let inputtedStreet = $(this).find("input.new-street").val();
+            let inputtedCity = $(this).find("input.new-city").val();
+            var inputtedCounty = $(this).find("input.new-county").val();
+            var newAddress = new Address(inputtedStreet, inputtedCity, inputtedCounty);
+            newContact.addresses.push(newAddress);
         });
 
     })
