@@ -12,7 +12,12 @@ function Address(street, city, county) {
 }
 
 Contact.prototype.fullName = function() {
-        return this.firstName + " " + this.lastName;
+    return this.firstName + " " + this.lastName;
+}
+
+
+Address.prototype.fullAddress = function() {
+        return this.street + ", " + this.city + this.county;
     }
     //user interface logic
 
@@ -63,7 +68,7 @@ $(document).ready(() => {
 
             $("ul#addresses").text("");
             newContact.addresses.forEach((address) => {
-                $("ul#addresses").append("<li>" + address.street + ", " + address.city + " " + address.county + "</li>");
+                $("ul#addresses").append("<li>" + address.fullAddress() + "</li>");
             });
         });
 
